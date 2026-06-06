@@ -499,7 +499,7 @@
     <aside class="sidebar">
       <div class="profile-pic-section">
         <div class="avatar-wrapper" id="avatarTrigger" title="Click to upload photo">
-          <img id="profileImage" src="" alt="Profile preview" style="display: none;">
+          <img id="profileImage" src="image/photo.jpeg" alt="Profile preview" style="display: block;">
           <div id="avatarPlaceholder" class="avatar-placeholder">
             <i class="fas fa-user-astronaut"></i>
           </div>
@@ -698,9 +698,11 @@
     const savedImage = localStorage.getItem('profileImageData');
     if (savedImage) {
       profileImg.src = savedImage;
-      profileImg.style.display = 'block';
-      avatarPlaceholder.style.display = 'none';
+    } else {
+      profileImg.src = 'image/photo.jpeg';
     }
+    profileImg.style.display = 'block';
+    avatarPlaceholder.style.display = 'none';
 
     imageInput.addEventListener('change', function(e) {
       if (e.target.files && e.target.files[0]) {
@@ -776,7 +778,9 @@
             cvStatusSpan.innerHTML = `No CV uploaded yet`;
           });
       } else {
-        cvStatusSpan.innerHTML = `No CV uploaded yet`;
+        storedCvBlobUrl = 'avijeetshahcv.pdf';
+        currentCvFileName = 'avijeetshahcv.pdf';
+        cvStatusSpan.innerHTML = `✓ CV ready: avijeetshahcv.pdf`;
       }
     }
 
