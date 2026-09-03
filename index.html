@@ -4,10 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Avijeet Shah | Full-Stack Portfolio</title>
-  <!-- Google Fonts & simple CSS reset -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    :root {
+      --white: #ffffff;
+      --text: #1c2434;
+      --muted: #64748b;
+      --coral: #ff6b4a;
+      --gold: #ffb347;
+      --indigo: #5b6cff;
+      --teal: #14b8a6;
+      --violet: #7c5cfc;
+      --border: #e8edf5;
+      --shadow: 0 24px 60px rgba(28, 36, 52, 0.08);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,27 +27,94 @@
     }
 
     body {
-      background: #0a0c10;
+      background: #ffffff;
+      background-image:
+        radial-gradient(1000px 480px at 8% -8%, rgba(255, 107, 74, 0.14), transparent 55%),
+        radial-gradient(800px 420px at 100% 0%, rgba(91, 108, 255, 0.13), transparent 50%),
+        radial-gradient(700px 380px at 85% 100%, rgba(20, 184, 166, 0.12), transparent 55%);
       font-family: 'Inter', sans-serif;
-      color: #e5e9f0;
+      color: var(--text);
       line-height: 1.5;
       padding: 2rem 1.5rem;
+      overflow-x: hidden;
+    }
+
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.45;
+      animation: orbFloat 14s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 280px;
+      height: 280px;
+      background: #ff6b4a;
+      top: 8%;
+      left: -60px;
+    }
+
+    .orb-2 {
+      width: 240px;
+      height: 240px;
+      background: #5b6cff;
+      top: 40%;
+      right: -50px;
+      animation-delay: -4s;
+    }
+
+    .orb-3 {
+      width: 200px;
+      height: 200px;
+      background: #14b8a6;
+      bottom: 4%;
+      left: 30%;
+      animation-delay: -8s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(24px, -30px) scale(1.08); }
     }
 
     .container {
+      position: relative;
+      z-index: 1;
       max-width: 1280px;
       margin: 0 auto;
-      background: #0f1117;
+      background: var(--white);
       border-radius: 2rem;
-      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6);
+      box-shadow: var(--shadow);
       overflow: hidden;
-      border: 1px solid #242933;
+      border: 1px solid var(--border);
+      animation: cardIn 0.8s ease both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(28px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .top-accent {
-      height: 4px;
-      background: linear-gradient(90deg, #ff7e5e, #feb47b, #6a11cb, #2575fc);
+      height: 5px;
       width: 100%;
+      background: linear-gradient(90deg, var(--coral), var(--gold), var(--indigo), var(--teal), var(--coral));
+      background-size: 220% 100%;
+      animation: gradientMove 7s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
     }
 
     .portfolio-grid {
@@ -44,11 +123,10 @@
       gap: 0;
     }
 
-    /* SIDEBAR */
     .sidebar {
-      background: #0b0e14;
+      background: linear-gradient(180deg, #fff8f4 0%, #ffffff 38%);
       padding: 2rem 1.8rem;
-      border-right: 1px solid #202430;
+      border-right: 1px solid #f3e7df;
     }
 
     .profile-pic-section {
@@ -59,52 +137,45 @@
     }
 
     .avatar-wrapper {
+      position: relative;
       width: 140px;
       height: 140px;
       border-radius: 50%;
-      background: #1e2436;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      border: 3px solid #ff9a5e;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      transition: 0.2s ease;
-      cursor: pointer;
+      animation: avatarFloat 4.5s ease-in-out infinite;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--coral), var(--gold), var(--indigo), var(--teal), var(--coral));
+      animation: spin 5s linear infinite;
+      z-index: 0;
     }
 
     .avatar-wrapper img {
+      position: relative;
+      z-index: 1;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      border-radius: 50%;
+      border: 4px solid #ffffff;
+      box-shadow: 0 10px 24px rgba(255, 107, 74, 0.22);
     }
 
-    .avatar-placeholder {
-      font-size: 3.5rem;
-      color: #8892b0;
-      text-align: center;
-      line-height: 1;
+    @keyframes avatarFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
-    .upload-label {
-      margin-top: 12px;
-      background: #1e2a3a;
-      padding: 6px 14px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #2d3a4b;
-    }
-
-    .upload-label:hover {
-      background: #2d3e55;
-      border-color: #ff9a5e;
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     .hide-input {
@@ -117,11 +188,12 @@
       letter-spacing: -0.3px;
       margin-top: 0.5rem;
       text-align: center;
+      color: var(--text);
     }
 
     .sub {
       text-align: center;
-      color: #9ca3af;
+      color: var(--muted);
       margin-bottom: 2rem;
       font-size: 0.9rem;
     }
@@ -130,25 +202,62 @@
       margin: 1.8rem 0;
     }
 
-    .info-block h3 {
+    .info-block h3,
+    .cv-actions h3,
+    .repo-section h3 {
       font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #ffb347;
+      color: var(--coral);
       margin-bottom: 1rem;
-      border-left: 3px solid #ff9a5e;
+      border-left: 3px solid var(--indigo);
       padding-left: 10px;
     }
 
     .skill-tag {
       display: inline-block;
-      background: #1a1f2b;
       padding: 6px 14px;
       border-radius: 30px;
       font-size: 0.8rem;
       font-weight: 500;
       margin: 0.25rem 0.4rem 0.25rem 0;
-      border: 1px solid #2d3442;
+      border: 1px solid transparent;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .skill-tag:nth-child(5n+1) {
+      background: #fff1eb;
+      color: #c2410c;
+      border-color: #ffd4c4;
+    }
+
+    .skill-tag:nth-child(5n+2) {
+      background: #eef2ff;
+      color: #3730a3;
+      border-color: #c7d2fe;
+    }
+
+    .skill-tag:nth-child(5n+3) {
+      background: #ecfdf8;
+      color: #0f766e;
+      border-color: #99f6e4;
+    }
+
+    .skill-tag:nth-child(5n+4) {
+      background: #fff7ed;
+      color: #b45309;
+      border-color: #fed7aa;
+    }
+
+    .skill-tag:nth-child(5n+5) {
+      background: #f5f3ff;
+      color: #6d28d9;
+      border-color: #ddd6fe;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 16px rgba(28, 36, 52, 0.08);
     }
 
     .contact-item {
@@ -157,19 +266,24 @@
       gap: 12px;
       margin: 0.8rem 0;
       font-size: 0.9rem;
-      color: #cbd5e6;
+      color: #334155;
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateX(4px);
+      color: var(--coral);
     }
 
     .contact-item i {
       width: 28px;
-      color: #ff9a5e;
+      color: var(--coral);
     }
 
-    /* CV ACTIONS with ANIMATED VIEW CV BUTTON */
     .cv-actions {
       margin-top: 2rem;
       padding-top: 1rem;
-      border-top: 1px solid #262e3f;
+      border-top: 1px solid #f0e4dc;
     }
 
     .cv-buttons {
@@ -180,8 +294,8 @@
     }
 
     .btn-outline, .btn-primary {
-      background: transparent;
-      border: 1.5px solid #ff9a5e;
+      background: #fff;
+      border: 1.5px solid var(--coral);
       padding: 10px 0;
       border-radius: 60px;
       font-weight: 600;
@@ -191,31 +305,29 @@
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      transition: 0.2s;
-      color: #ffd3b5;
+      transition: 0.25s ease;
+      color: var(--coral);
     }
 
     .btn-primary {
-      background: #ff9a5e20;
-      border-color: #ff9a5e;
-      color: #ffd7b5;
+      background: linear-gradient(135deg, #fff1eb, #eef2ff);
+      border-color: var(--indigo);
+      color: #3730a3;
     }
 
     .btn-primary:hover, .btn-outline:hover {
-      background: #ff9a5e30;
-      border-color: #ffb86b;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(91, 108, 255, 0.15);
     }
 
-    /* ATTRACTIVE ANIMATED VIEW CV BUTTON */
     .btn-view-cv {
-      background: linear-gradient(135deg, #ff9a5e, #ff6a3d);
+      background: linear-gradient(135deg, var(--coral), var(--indigo));
       border: none;
       color: white;
       position: relative;
       overflow: hidden;
       z-index: 1;
-      box-shadow: 0 0 12px rgba(255, 106, 61, 0.4);
+      box-shadow: 0 8px 20px rgba(255, 107, 74, 0.28);
       transition: all 0.3s ease;
     }
 
@@ -226,7 +338,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
       transition: left 0.6s ease;
       z-index: -1;
     }
@@ -236,9 +348,10 @@
     }
 
     .btn-view-cv:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 20px rgba(255, 106, 61, 0.7);
-      letter-spacing: 1px;
+      transform: scale(1.03);
+      box-shadow: 0 12px 28px rgba(91, 108, 255, 0.28);
+      letter-spacing: 0.4px;
+      color: #fff;
     }
 
     .btn-view-cv i {
@@ -250,22 +363,13 @@
       50% { transform: translateY(-3px); }
     }
 
-    .cv-status {
-      font-size: 0.7rem;
-      color: #80cbc4;
-      text-align: center;
-      margin-top: 8px;
-      transition: all 0.2s;
-    }
-
-    /* MODAL STYLES FOR ATTRACTIVE CV PREVIEW */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(28, 36, 52, 0.45);
       backdrop-filter: blur(8px);
       z-index: 1000;
       display: flex;
@@ -282,12 +386,12 @@
     }
 
     .modal-container {
-      background: #0f1119;
+      background: #ffffff;
       width: 90%;
       max-width: 550px;
       border-radius: 2rem;
-      border: 1px solid #ff9a5e;
-      box-shadow: 0 30px 50px rgba(0,0,0,0.5), 0 0 0 2px rgba(255, 154, 94, 0.2);
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 50px rgba(28, 36, 52, 0.16);
       transform: scale(0.9);
       transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
       overflow: hidden;
@@ -299,8 +403,8 @@
 
     .modal-header {
       padding: 1.2rem 1.5rem;
-      background: linear-gradient(135deg, #1e2a3a, #0f1119);
-      border-bottom: 1px solid #ff9a5e;
+      background: linear-gradient(135deg, #fff8f4, #eef2ff);
+      border-bottom: 1px solid #f0e4dc;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -309,7 +413,7 @@
     .modal-header h3 {
       font-size: 1.4rem;
       font-weight: 600;
-      color: #ffd7b5;
+      color: var(--text);
     }
 
     .close-modal {
@@ -317,13 +421,13 @@
       border: none;
       font-size: 1.8rem;
       cursor: pointer;
-      color: #ff9a5e;
+      color: var(--coral);
       transition: transform 0.2s;
     }
 
     .close-modal:hover {
       transform: rotate(90deg);
-      color: #ff6a3d;
+      color: var(--indigo);
     }
 
     .modal-body {
@@ -333,7 +437,7 @@
 
     .cv-preview-icon {
       font-size: 5rem;
-      color: #ff9a5e;
+      color: var(--coral);
       margin-bottom: 1rem;
       animation: float 2s ease-in-out infinite;
     }
@@ -345,11 +449,12 @@
     }
 
     .cv-details {
-      background: #1a1f2b;
+      background: #f8fafc;
       padding: 1rem;
       border-radius: 1rem;
       margin: 1.2rem 0;
       word-break: break-word;
+      border: 1px solid var(--border);
     }
 
     .cv-details p {
@@ -365,12 +470,12 @@
     }
 
     .modal-download-btn {
-      background: #ff9a5e;
+      background: linear-gradient(135deg, var(--coral), var(--indigo));
       border: none;
       padding: 10px 24px;
       border-radius: 40px;
       font-weight: bold;
-      color: #0f1119;
+      color: #ffffff;
       cursor: pointer;
       transition: all 0.2s;
       display: inline-flex;
@@ -379,20 +484,18 @@
     }
 
     .modal-download-btn:hover {
-      background: #ffb86b;
       transform: scale(1.03);
-      box-shadow: 0 4px 12px rgba(255, 154, 94, 0.4);
+      box-shadow: 0 8px 18px rgba(91, 108, 255, 0.28);
     }
 
     .no-cv-message {
-      color: #ffaa88;
+      color: #c2410c;
       padding: 1rem;
     }
 
-    /* MAIN CONTENT */
     .main-content {
-      padding: 2rem 2rem 2rem 2rem;
-      background: #0f1119;
+      padding: 2rem;
+      background: #ffffff;
     }
 
     .greeting {
@@ -402,10 +505,16 @@
     .greeting h1 {
       font-size: 2rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff, #ffb97a);
+      background: linear-gradient(135deg, var(--coral), var(--indigo), var(--teal));
+      background-size: 180% 180%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      animation: gradientMove 6s linear infinite;
+    }
+
+    .greeting p {
+      color: var(--muted);
     }
 
     .repo-section {
@@ -420,32 +529,64 @@
     }
 
     .repo-card {
-      background: #131823;
+      background: #ffffff;
       border-radius: 1.2rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid #282f3f;
-      transition: all 0.2s;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
+    .repo-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.7), transparent 70%);
+      transform: translateX(-120%);
+      transition: transform 0.6s ease;
+    }
+
+    .repo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 30px rgba(91, 108, 255, 0.12);
+      border-color: #c7d2fe;
+    }
+
+    .repo-card:hover::after {
+      transform: translateX(120%);
+    }
+
+    .repo-card:nth-child(1) { border-top: 3px solid var(--coral); }
+    .repo-card:nth-child(2) { border-top: 3px solid var(--indigo); }
+    .repo-card:nth-child(3) { border-top: 3px solid var(--teal); }
+    .repo-card:nth-child(4) { border-top: 3px solid var(--gold); }
+
     .repo-card i {
-      color: #ffa45e;
+      color: var(--coral);
       margin-right: 8px;
     }
+
+    .repo-card:nth-child(2) i { color: var(--indigo); }
+    .repo-card:nth-child(3) i { color: var(--teal); }
+    .repo-card:nth-child(4) i { color: #b45309; }
 
     .repo-title {
       font-weight: 700;
       font-size: 1.1rem;
+      color: var(--text);
     }
 
     .repo-desc {
       font-size: 0.75rem;
-      color: #8b99b0;
+      color: var(--muted);
       margin: 8px 0;
     }
 
     .lang-badge {
       font-size: 0.7rem;
-      background: #20283a;
+      background: #eef2ff;
+      color: #3730a3;
       display: inline-block;
       padding: 2px 10px;
       border-radius: 50px;
@@ -453,11 +594,11 @@
     }
 
     .contributions {
-      background: #0c0f16;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
       border-radius: 1.2rem;
       padding: 1rem;
       margin: 2rem 0;
-      border: 1px solid #232837;
+      border: 1px solid var(--border);
     }
 
     .contribution-header {
@@ -465,15 +606,99 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      color: var(--text);
+    }
+
+    .year-badge {
+      font-size: 12px;
+      background: linear-gradient(135deg, #fff1eb, #eef2ff);
+      color: #3730a3;
+      padding: 4px 10px;
+      border-radius: 30px;
+      font-weight: 600;
+    }
+
+    .contrib-meta {
+      margin: 16px 0 8px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .contrib-panel {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 6px;
+    }
+
+    .contrib-grid {
+      display: grid;
+      grid-template-columns: repeat(26, 1fr);
+      gap: 3px;
+      overflow-x: auto;
+    }
+
+    .contrib-cell {
+      height: 12px;
+      border-radius: 2px;
+      animation: cellPop 0.5s ease both;
+    }
+
+    @keyframes cellPop {
+      from { opacity: 0; transform: scale(0.4); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .contrib-stats {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
     }
 
     .footer-note {
       font-size: 0.7rem;
       text-align: center;
       margin-top: 2rem;
-      color: #6c7a91;
-      border-top: 1px solid #202532;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
       padding-top: 1.5rem;
+    }
+
+    .brand-note {
+      color: var(--coral);
+      font-size: 0.75rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 780px) {
@@ -482,39 +707,51 @@
       }
       .sidebar {
         border-right: none;
-        border-bottom: 1px solid #202430;
+        border-bottom: 1px solid #f3e7df;
       }
       body {
         padding: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
 </head>
 <body>
 
+<div class="bg-orbs" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
 <div class="container">
   <div class="top-accent"></div>
   <div class="portfolio-grid">
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar">
-      <div class="profile-pic-section">
-        <div class="avatar-wrapper" id="avatarTrigger" title="Click to upload photo">
-          <img id="profileImage" src="image/photo.jpeg" alt="Profile preview" style="display: block;">
-          <div id="avatarPlaceholder" class="avatar-placeholder">
-            <i class="fas fa-user-astronaut"></i>
-          </div>
+      <div class="profile-pic-section reveal">
+        <div class="avatar-wrapper">
+          <span class="avatar-ring" aria-hidden="true"></span>
+          <!-- Change the photo by updating the src path below -->
+          <img src="image/Avijeet.jpeg" alt="Avijeet Shah">
         </div>
-        <label class="upload-label" for="imageUploadInput">
-          <i class="fas fa-camera"></i> Upload Photo
-        </label>
-        <input type="file" id="imageUploadInput" class="hide-input" accept="image/jpeg, image/png, image/jpg">
-        <div style="font-size: 12px; margin-top: 6px;">Click avatar to change</div>
       </div>
       
-      <h2>Avijeet Shah</h2>
-      <div class="sub">I am a Full-stack Developer</div>
+      <h2 class="reveal delay-1">Avijeet Shah</h2>
+      <div class="sub reveal delay-1">I am a Full-stack Developer</div>
 
-      <div class="info-block">
+      <div class="info-block reveal delay-2">
         <h3><i class="fas fa-code"></i> language</h3>
         <div>
           <span class="skill-tag">HTML5</span>
@@ -522,10 +759,21 @@
           <span class="skill-tag">JavaScript</span>
           <span class="skill-tag">React.js</span>
           <span class="skill-tag">Node.js</span>
+           <span class="skill-tag">Tailwind CSS</span>
+           <span class="skill-tag">Typescript</span>
+           <span class="skill-tag">Next.js</span>
+           <span class="skill-tag">MongoDB</span>
+           <span class="skill-tag">PostgreSQL</span>
+           <span class="skill-tag">My SQL</span>
+           <span class="skill-tag">Express.js</span>
+           <span class="skill-tag">Python</span>
+           <span class="skill-tag">Wordpress</span>
+           <span class="skill-tag">Figma</span>
+           <span class="skill-tag">Vercel</span>
         </div>
       </div>
 
-      <div class="info-block">
+      <div class="info-block reveal delay-3">
         <h3><i class="fas fa-tools"></i> Tools</h3>
         <div>
           <span class="skill-tag">VS Code</span>
@@ -535,20 +783,17 @@
         </div>
       </div>
 
-      <div class="info-block">
-        <h3><i class="fas fa-address-card"></i> Contato</h3>
+      <div class="info-block reveal delay-4">
+        <h3><i class="fas fa-address-card"></i> Contact</h3>
         <div class="contact-item"><i class="fas fa-envelope"></i> avijeet305@portfolio.com</div>
-        <div class="contact-item"><i class="fab fa-whatsapp"></i> +977 9811092733</div>
+        <div class="contact-item"><i class="fab fa-whatsapp"></i> +977 98xxxxxxxx</div>
         <div class="contact-item"><i class="fab fa-github"></i> @avijeetshah</div>
       </div>
 
       <!-- CV Section with ATTRACTIVE ANIMATED VIEW CV button -->
-      <div class="cv-actions">
+      <div class="cv-actions reveal delay-5">
         <h3><i class="fas fa-file-alt"></i> Curriculum Vitae</h3>
         <div class="cv-buttons">
-          <label class="btn-outline" for="cvFileInput" style="cursor: pointer;">
-            <i class="fas fa-upload"></i> Upload CV (PDF/DOC)
-          </label>
           <input type="file" id="cvFileInput" class="hide-input" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
           
           <button id="downloadCvBtn" class="btn-primary">
@@ -559,41 +804,36 @@
           <button id="viewCvBtn" class="btn-primary btn-view-cv">
             <i class="fas fa-eye"></i> View CV with Animation
           </button>
-          
-          <div id="cvStatusMsg" class="cv-status">No CV uploaded yet</div>
-        </div>
-        <div class="alert-msg">
-          <i class="fas fa-info-circle"></i> Upload your CV, then click "View CV with Animation"
         </div>
       </div>
     </aside>
 
     <!-- RIGHT MAIN CONTENT -->
     <main class="main-content">
-      <div class="greeting">
+      <div class="greeting reveal">
         <h1>Portfolio & Repositories</h1>
         <p style="margin-top: 8px;">Full-stack developer passionate about modern interfaces and creative solutions. Check out my featured projects.</p>
       </div>
 
       <div class="repo-section">
-        <h3><i class="fab fa-github-alt"></i> Popular repositories</h3>
+        <h3 class="reveal delay-1"><i class="fab fa-github-alt"></i> Popular repositories</h3>
         <div class="repo-grid">
-          <div class="repo-card">
+          <div class="repo-card reveal delay-2">
             <div><i class="fab fa-html5"></i><span class="repo-title"> C18</span></div>
             <div class="repo-desc">Interactive dashboard with HTML/CSS/JS, integrated CV upload system.</div>
             <span class="lang-badge">HTML • CSS</span>
           </div>
-          <div class="repo-card">
+          <div class="repo-card reveal delay-3">
             <div><i class="fab fa-java"></i><span class="repo-title"> JAVA-JI</span></div>
             <div class="repo-desc">Java OOP project, GUI with Swing and MVC pattern, visitor system.</div>
             <span class="lang-badge">Java • Swing</span>
           </div>
-          <div class="repo-card">
+          <div class="repo-card reveal delay-4">
             <div><i class="fab fa-python"></i><span class="repo-title"> ShoeManagementSystem</span></div>
             <div class="repo-desc">Python inventory management, invoices, restocking, and CSV reports.</div>
             <span class="lang-badge">Python</span>
           </div>
-          <div class="repo-card">
+          <div class="repo-card reveal delay-5">
             <div><i class="fas fa-book"></i><span class="repo-title"> book_store</span></div>
             <div class="repo-desc">Book store frontend (Avijeet collab) with cart and localStorage.</div>
             <span class="lang-badge">JS • Tailwind</span>
@@ -601,48 +841,47 @@
         </div>
       </div>
 
-      <div class="contributions">
+      <div class="contributions reveal delay-4">
         <div class="contribution-header">
           <span><i class="fas fa-chart-line"></i> <strong>18 contributions in the last year</strong></span>
-          <span style="font-size: 12px; background: #1e2538; padding: 4px 8px; border-radius: 30px;">2026</span>
+          <span class="year-badge">2026</span>
         </div>
-        <div style="margin: 16px 0 8px 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: space-between; align-items: center;">
-          <div style="display: flex; gap: 4px;">
-            <span style="background:#2d374b; width: 12px; height: 12px; border-radius: 2px;"></span>
-            <span style="background:#3c4b6e; width: 12px; height: 12px; border-radius: 2px;"></span>
-            <span style="background:#5975b6; width: 12px; height: 12px; border-radius: 2px;"></span>
-            <span style="background:#8bb3ff; width: 12px; height: 12px; border-radius: 2px;"></span>
-            <span style="font-size: 0.7rem; margin-left: 6px;">Less → More</span>
+        <div class="contrib-meta">
+          <div style="display: flex; gap: 4px; align-items: center;">
+            <span class="legend-swatch" style="background:#eef2f7;"></span>
+            <span class="legend-swatch" style="background:#ffd8c8;"></span>
+            <span class="legend-swatch" style="background:#ff9d7a;"></span>
+            <span class="legend-swatch" style="background:#ff6b4a;"></span>
+            <span class="legend-swatch" style="background:#14b8a6;"></span>
+            <span style="margin-left: 6px;">Less → More</span>
           </div>
-          <div style="font-size: 0.7rem;">Jun 2025 - May 2026</div>
+          <div>Jun 2025 - May 2026</div>
         </div>
-        <div style="background: #070b10; border-radius: 12px; padding: 12px; margin-top: 6px;">
-          <div style="display: grid; grid-template-columns: repeat(26, 1fr); gap: 3px; overflow-x: auto;">
-            <script>for(let i=0;i<52;i++) document.write('<div style="background:#2d374b; height:12px; border-radius:2px;"></div>');</script>
-          </div>
+        <div class="contrib-panel">
+          <div class="contrib-grid" id="contribGrid"></div>
           <div class="footer-note" style="margin-top: 12px; border: none; text-align: left; font-size: 0.65rem;">
             <i class="fas fa-info-circle"></i> Activity includes pushes, pull requests, and issue comments.
           </div>
         </div>
-        <div style="margin-top: 12px; font-size: 0.75rem; display: flex; gap: 16px; flex-wrap: wrap;">
+        <div class="contrib-stats">
           <span><i class="fab fa-github"></i> 0 followers · 1 following</span>
           <span><i class="fas fa-code-branch"></i> Customize your pins</span>
         </div>
       </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-top: 1.2rem;">
+      <div class="reveal delay-5" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-top: 1.2rem;">
         <div>
           <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
           <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
           <span class="skill-tag"><i class="fab fa-js"></i> ES2022</span>
           <span class="skill-tag"><i class="fab fa-git-alt"></i> Git flow</span>
         </div>
-        <div style="color: #ffb347; font-size: 0.75rem;">
+        <div class="brand-note">
           <i class="fas fa-code"></i> @avijeet · Envato Template
         </div>
       </div>
       <div class="footer-note">
-        Interactive portfolio with image upload, CV upload, animated view CV and functional download.
+        Interactive portfolio with CV upload, animated view CV and functional download.
         <br>Source code on GitHub — <i class="fab fa-github"></i> avijeetshah/portfolio
       </div>
     </main>
@@ -674,50 +913,21 @@
 
 <script>
   (function() {
-    // ----- IMAGE UPLOAD feature
-    const imageInput = document.getElementById('imageUploadInput');
-    const profileImg = document.getElementById('profileImage');
-    const avatarPlaceholder = document.getElementById('avatarPlaceholder');
-    const avatarWrapper = document.getElementById('avatarTrigger');
-
-    function updateProfilePicture(file) {
-      if (file && (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg')) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          profileImg.src = e.target.result;
-          profileImg.style.display = 'block';
-          avatarPlaceholder.style.display = 'none';
-          localStorage.setItem('profileImageData', e.target.result);
-        };
-        reader.readAsDataURL(file);
-      } else if (file) {
-        alert('Please upload a valid image (JPEG or PNG).');
+    const contribGrid = document.getElementById('contribGrid');
+    if (contribGrid) {
+      const levels = ['#eef2f7', '#ffd8c8', '#ff9d7a', '#ff6b4a', '#14b8a6'];
+      for (let i = 0; i < 52; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'contrib-cell';
+        cell.style.background = levels[Math.floor(Math.random() * levels.length)];
+        cell.style.animationDelay = (i * 0.02) + 's';
+        contribGrid.appendChild(cell);
       }
     }
-
-    const savedImage = localStorage.getItem('profileImageData');
-    if (savedImage) {
-      profileImg.src = savedImage;
-    } else {
-      profileImg.src = 'image/photo.jpeg';
-    }
-    profileImg.style.display = 'block';
-    avatarPlaceholder.style.display = 'none';
-
-    imageInput.addEventListener('change', function(e) {
-      if (e.target.files && e.target.files[0]) {
-        updateProfilePicture(e.target.files[0]);
-      }
-    });
-
-    avatarWrapper.addEventListener('click', function() {
-      imageInput.click();
-    });
 
     // ----- CV UPLOAD & STORAGE logic
     const cvFileInput = document.getElementById('cvFileInput');
     const downloadBtn = document.getElementById('downloadCvBtn');
-    const cvStatusSpan = document.getElementById('cvStatusMsg');
     
     let storedCvBlobUrl = null;
     let currentCvFileName = null;
@@ -753,8 +963,6 @@
         } catch(e) { console.warn("LocalStorage capacity note", e); }
       };
       reader.readAsDataURL(file);
-      
-      cvStatusSpan.innerHTML = `✓ CV ready: ${currentCvFileName}`;
       return true;
     }
     
@@ -770,17 +978,14 @@
             storedCvBlobUrl = newUrl;
             currentCvFileName = cvName;
             currentCvFileBlob = blob;
-            cvStatusSpan.innerHTML = `✓ CV restored: ${currentCvFileName}`;
           })
           .catch(() => {
             localStorage.removeItem('cvBase64');
             localStorage.removeItem('cvFileName');
-            cvStatusSpan.innerHTML = `No CV uploaded yet`;
           });
       } else {
         storedCvBlobUrl = 'avijeetshahcv.pdf';
         currentCvFileName = 'avijeetshahcv.pdf';
-        cvStatusSpan.innerHTML = `✓ CV ready: avijeetshahcv.pdf`;
       }
     }
 
@@ -812,7 +1017,6 @@
 
     function openModalWithCV() {
       if (!storedCvBlobUrl || !currentCvFileName) {
-        // Show stylish "No CV" message inside modal
         cvPreviewDetails.innerHTML = `
           <div class="no-cv-message">
             <i class="fas fa-exclamation-triangle" style="font-size: 2rem;"></i>
@@ -824,16 +1028,13 @@
         return;
       }
       
-      // Determine file type display info
       const fileExtension = currentCvFileName.split('.').pop().toUpperCase();
-      let fileIcon = '<i class="fas fa-file-pdf"></i>';
-      if (fileExtension === 'DOC' || fileExtension === 'DOCX') fileIcon = '<i class="fas fa-file-word"></i>';
       
       cvPreviewDetails.innerHTML = `
         <p><strong>Document ready for preview</strong></p>
         <p style="font-size: 0.9rem; margin: 8px 0;"><i class="fas fa-file"></i> ${currentCvFileName}</p>
-        <p><span class="skill-tag" style="background:#2d3e55;">${fileExtension} document</span></p>
-        <p style="margin-top: 12px; font-size:0.8rem; color:#aaa;">Click the button below to download and view full CV.</p>
+        <p><span class="skill-tag">${fileExtension} document</span></p>
+        <p style="margin-top: 12px; font-size:0.8rem; color:#64748b;">Click the button below to download and view full CV.</p>
       `;
       modal.classList.add('active');
     }
