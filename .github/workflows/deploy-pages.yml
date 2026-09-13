@@ -33,8 +33,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Keep custom domain
-        run: cp CNAME out/CNAME
+      - name: Keep custom domain and SEO files
+        run: |
+          cp CNAME out/CNAME
+          cp public/sitemap.xml out/sitemap.xml
+          cp public/robots.txt out/robots.txt
+          ls -la out | head -40
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

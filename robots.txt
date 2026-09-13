@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avijeetshah.com.np/sitemap.xml
