@@ -8,16 +8,21 @@ export default function Sidebar() {
       <div className="mb-8 flex flex-col items-center reveal">
         <div className="avatar-wrapper">
           <span className="avatar-ring" aria-hidden="true" />
-          <Image src="/image/Avijeet.jpeg" alt="Avijeet Shah" width={140} height={140} />
+          <Image
+            src="/image/Avijeet.jpeg"
+            alt="Avijeet Shah, full-stack developer from Nepal"
+            width={140}
+            height={140}
+          />
         </div>
       </div>
 
-      <h2 className="mt-2 text-center text-[1.6rem] font-semibold tracking-[-0.3px] text-ink reveal delay-1">
+      <h1 className="mt-2 text-center text-[1.6rem] font-semibold tracking-[-0.3px] text-ink reveal delay-1">
         Avijeet Shah
-      </h2>
-      <div className="mb-8 text-center text-[0.9rem] text-muted reveal delay-1">
-        I am a Full-stack Developer
-      </div>
+      </h1>
+      <p className="mb-8 text-center text-[0.9rem] text-muted reveal delay-1">
+        Full-stack developer from Nepal. Official website: avijeetshah.com.np
+      </p>
 
       <div className="my-[1.8rem] reveal delay-2">
         <h3 className="section-title">
@@ -49,11 +54,24 @@ export default function Sidebar() {
         <h3 className="section-title">
           <i className="fas fa-address-card" /> Contact
         </h3>
-        {contacts.map((item) => (
-          <div key={item.label} className="contact-item">
-            <i className={item.icon} /> {item.label}
-          </div>
-        ))}
+        {contacts.map((item) =>
+          item.href ? (
+            <a
+              key={item.label}
+              href={item.href}
+              className="contact-item"
+              {...(item.href.startsWith("http")
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+            >
+              <i className={item.icon} /> {item.label}
+            </a>
+          ) : (
+            <div key={item.label} className="contact-item">
+              <i className={item.icon} /> {item.label}
+            </div>
+          )
+        )}
       </div>
 
       <CvActions />

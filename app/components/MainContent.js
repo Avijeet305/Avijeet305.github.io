@@ -5,17 +5,18 @@ export default function MainContent() {
   return (
     <main className="bg-white p-8">
       <div className="mb-8 reveal">
-        <h1 className="greeting-title">Portfolio & Repositories</h1>
+        <h2 className="greeting-title">Portfolio of Avijeet Shah</h2>
         <p className="mt-2 text-muted">
-          Full-stack developer passionate about modern interfaces and creative solutions. Check out
-          my featured projects.
+          Welcome to the official website of Avijeet Shah. I am a full-stack developer in Nepal
+          building web products with Next.js, React, and Node.js. Browse selected work on
+          avijeetshah.com.np.
         </p>
       </div>
 
       <div className="my-8">
-        <h3 className="section-title reveal delay-1">
-          <i className="fab fa-github-alt" /> Popular repositories
-        </h3>
+        <h2 className="section-title reveal delay-1">
+          <i className="fab fa-github-alt" /> Projects by Avijeet Shah
+        </h2>
         <div className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-[1.2rem]">
           {repos.map((repo, index) => (
             <div
@@ -84,11 +85,17 @@ export default function MainContent() {
           <i className="fas fa-code" /> @avijeet · Envato Template
         </div>
       </div>
-      <div className="mt-8 border-t border-line pt-6 text-center text-[0.7rem] text-muted">
-        Interactive portfolio with CV upload, animated view CV and functional download.
+      <footer className="mt-8 border-t border-line pt-6 text-center text-[0.7rem] text-muted">
+        © {new Date().getFullYear()} Avijeet Shah · Official website{" "}
+        <a href="https://avijeetshah.com.np/" className="underline">
+          avijeetshah.com.np
+        </a>
         <br />
-        Source code on GitHub — <i className="fab fa-github" /> avijeetshah/portfolio
-      </div>
+        Source on GitHub —{" "}
+        <a href="https://github.com/Avijeet305" className="underline" rel="noopener noreferrer">
+          <i className="fab fa-github" /> Avijeet305
+        </a>
+      </footer>
     </main>
   );
 }
