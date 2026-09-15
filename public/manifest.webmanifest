@@ -1,0 +1,16 @@
+{
+  "name": "Avijeet Shah | Full-Stack Developer",
+  "short_name": "Avijeet Shah",
+  "description": "Official website of Avijeet Shah, a full-stack developer in Nepal. Portfolio, projects, and contact at avijeetshah.com.np.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1c2434",
+  "icons": [
+    {
+      "src": "/image/Avijeet.jpeg",
+      "sizes": "140x140",
+      "type": "image/jpeg"
+    }
+  ]
+}
