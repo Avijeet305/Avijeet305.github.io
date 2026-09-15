@@ -29,7 +29,7 @@ export default function CvActions() {
     const base64Cv = localStorage.getItem("cvBase64");
     const storedName = localStorage.getItem("cvFileName");
 
-    if (base64Cv && storedName) {
+    if (base64Cv && storedName && storedName !== "avijeetshahcv.pdf") {
       fetch(base64Cv)
         .then((res) => res.blob())
         .then((blob) => {

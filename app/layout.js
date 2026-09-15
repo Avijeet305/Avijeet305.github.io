@@ -63,8 +63,7 @@ export const metadata = {
   icons: {
     icon: [{ url: "/image/Avijeet.jpeg", type: "image/jpeg" }],
     apple: [{ url: "/image/Avijeet.jpeg" }]
-  },
-  manifest: "/manifest.json"
+  }
 };
 
 export default function RootLayout({ children }) {
